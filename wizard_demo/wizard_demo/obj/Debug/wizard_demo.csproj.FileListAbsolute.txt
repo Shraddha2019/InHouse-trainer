@@ -1,0 +1,5 @@
+c:\users\neova-user\documents\visual studio 2012\Projects\wizard_demo\wizard_demo\bin\wizard_demo.dll
+c:\users\neova-user\documents\visual studio 2012\Projects\wizard_demo\wizard_demo\bin\wizard_demo.pdb
+c:\users\neova-user\documents\visual studio 2012\Projects\wizard_demo\wizard_demo\obj\Debug\wizard_demo.dll
+c:\users\neova-user\documents\visual studio 2012\Projects\wizard_demo\wizard_demo\obj\Debug\wizard_demo.pdb
+C:\Users\Neova-user\Documents\Visual Studio 2012\Projects\wizard_demo\wizard_demo\obj\Debug\wizard_demo.csprojResolveAssemblyReference.cache
