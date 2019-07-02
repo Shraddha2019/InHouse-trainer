@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ECOMMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ECOMMModelStoreContainer">
+    <EntitySet Name="Dept" EntityType="ECOMMModel.Store.Dept" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employee1" EntityType="ECOMMModel.Store.Employee1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmpRole" EntityType="ECOMMModel.Store.EmpRole" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Role" EntityType="ECOMMModel.Store.Role" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Employee1_Dept" Association="ECOMMModel.Store.FK_Employee1_Dept">
+      <End Role="Dept" EntitySet="Dept" />
+      <End Role="Employee1" EntitySet="Employee1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpRole_Employee1" Association="ECOMMModel.Store.FK_EmpRole_Employee1">
+      <End Role="Employee1" EntitySet="Employee1" />
+      <End Role="EmpRole" EntitySet="EmpRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpRole_EmpRole1" Association="ECOMMModel.Store.FK_EmpRole_EmpRole1">
+      <End Role="EmpRole" EntitySet="EmpRole" />
+      <End Role="EmpRole1" EntitySet="EmpRole" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Dept">
+    <Key>
+      <PropertyRef Name="DeptId" />
+    </Key>
+    <Property Name="DeptId" Type="int" Nullable="false" />
+    <Property Name="Dname" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Employee1">
+    <Key>
+      <PropertyRef Name="EmpID" />
+    </Key>
+    <Property Name="EmpID" Type="int" Nullable="false" />
+    <Property Name="Empname" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="Contact" Type="int" Nullable="false" />
+    <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DeptID" Type="int" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EmpRole">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="EmpId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Employee1_Dept">
+    <End Role="Dept" Type="ECOMMModel.Store.Dept" Multiplicity="1" />
+    <End Role="Employee1" Type="ECOMMModel.Store.Employee1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="DeptId" />
+      </Principal>
+      <Dependent Role="Employee1">
+        <PropertyRef Name="DeptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpRole_Employee1">
+    <End Role="Employee1" Type="ECOMMModel.Store.Employee1" Multiplicity="1" />
+    <End Role="EmpRole" Type="ECOMMModel.Store.EmpRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee1">
+        <PropertyRef Name="EmpID" />
+      </Principal>
+      <Dependent Role="EmpRole">
+        <PropertyRef Name="EmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpRole_EmpRole1">
+    <End Role="EmpRole" Type="ECOMMModel.Store.EmpRole" Multiplicity="1" />
+    <End Role="EmpRole1" Type="ECOMMModel.Store.EmpRole" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="EmpRole">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="EmpRole1">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

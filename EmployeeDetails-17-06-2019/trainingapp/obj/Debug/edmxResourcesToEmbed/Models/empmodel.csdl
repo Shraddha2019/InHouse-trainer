@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ECOMMModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ECOMMEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Depts" EntityType="ECOMMModel.Dept" />
+    <EntitySet Name="Employee1" EntityType="ECOMMModel.Employee1" />
+    <EntitySet Name="EmpRoles" EntityType="ECOMMModel.EmpRole" />
+    <EntitySet Name="Roles" EntityType="ECOMMModel.Role" />
+    <AssociationSet Name="FK_Employee1_Dept" Association="ECOMMModel.FK_Employee1_Dept">
+      <End Role="Dept" EntitySet="Depts" />
+      <End Role="Employee1" EntitySet="Employee1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpRole_Employee1" Association="ECOMMModel.FK_EmpRole_Employee1">
+      <End Role="Employee1" EntitySet="Employee1" />
+      <End Role="EmpRole" EntitySet="EmpRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpRole_EmpRole1" Association="ECOMMModel.FK_EmpRole_EmpRole1">
+      <End Role="EmpRole" EntitySet="EmpRoles" />
+      <End Role="EmpRole1" EntitySet="EmpRoles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Dept">
+    <Key>
+      <PropertyRef Name="DeptId" />
+    </Key>
+    <Property Name="DeptId" Type="Int32" Nullable="false" />
+    <Property Name="Dname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Employee1" Relationship="ECOMMModel.FK_Employee1_Dept" FromRole="Dept" ToRole="Employee1" />
+  </EntityType>
+  <EntityType Name="Employee1">
+    <Key>
+      <PropertyRef Name="EmpID" />
+    </Key>
+    <Property Name="EmpID" Type="Int32" Nullable="false" />
+    <Property Name="Empname" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="Contact" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="DeptID" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Dept" Relationship="ECOMMModel.FK_Employee1_Dept" FromRole="Employee1" ToRole="Dept" />
+    <NavigationProperty Name="EmpRoles" Relationship="ECOMMModel.FK_EmpRole_Employee1" FromRole="Employee1" ToRole="EmpRole" />
+  </EntityType>
+  <EntityType Name="EmpRole">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="EmpId" Type="Int32" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee1" Relationship="ECOMMModel.FK_EmpRole_Employee1" FromRole="EmpRole" ToRole="Employee1" />
+    <NavigationProperty Name="EmpRole1" Relationship="ECOMMModel.FK_EmpRole_EmpRole1" FromRole="EmpRole" ToRole="EmpRole1" />
+    <NavigationProperty Name="EmpRole2" Relationship="ECOMMModel.FK_EmpRole_EmpRole1" FromRole="EmpRole1" ToRole="EmpRole" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="RoleName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Employee1_Dept">
+    <End Role="Dept" Type="ECOMMModel.Dept" Multiplicity="1" />
+    <End Role="Employee1" Type="ECOMMModel.Employee1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="DeptId" />
+      </Principal>
+      <Dependent Role="Employee1">
+        <PropertyRef Name="DeptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpRole_Employee1">
+    <End Role="Employee1" Type="ECOMMModel.Employee1" Multiplicity="1" />
+    <End Role="EmpRole" Type="ECOMMModel.EmpRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee1">
+        <PropertyRef Name="EmpID" />
+      </Principal>
+      <Dependent Role="EmpRole">
+        <PropertyRef Name="EmpId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpRole_EmpRole1">
+    <End Role="EmpRole" Type="ECOMMModel.EmpRole" Multiplicity="1" />
+    <End Role="EmpRole1" Type="ECOMMModel.EmpRole" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="EmpRole">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="EmpRole1">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

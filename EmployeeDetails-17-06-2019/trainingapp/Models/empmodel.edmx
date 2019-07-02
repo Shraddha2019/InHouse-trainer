@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ECOMMModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ECOMMModelStoreContainer">
+          <EntitySet Name="Dept" EntityType="ECOMMModel.Store.Dept" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employee1" EntityType="ECOMMModel.Store.Employee1" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmpRole" EntityType="ECOMMModel.Store.EmpRole" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Role" EntityType="ECOMMModel.Store.Role" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Employee1_Dept" Association="ECOMMModel.Store.FK_Employee1_Dept">
+            <End Role="Dept" EntitySet="Dept" />
+            <End Role="Employee1" EntitySet="Employee1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpRole_Employee1" Association="ECOMMModel.Store.FK_EmpRole_Employee1">
+            <End Role="Employee1" EntitySet="Employee1" />
+            <End Role="EmpRole" EntitySet="EmpRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpRole_EmpRole1" Association="ECOMMModel.Store.FK_EmpRole_EmpRole1">
+            <End Role="EmpRole" EntitySet="EmpRole" />
+            <End Role="EmpRole1" EntitySet="EmpRole" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Dept">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="int" Nullable="false" />
+          <Property Name="Dname" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employee1">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="Empname" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Contact" Type="int" Nullable="false" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="DeptID" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmpRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="EmpId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Employee1_Dept">
+          <End Role="Dept" Type="ECOMMModel.Store.Dept" Multiplicity="1" />
+          <End Role="Employee1" Type="ECOMMModel.Store.Employee1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dept">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="DeptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpRole_Employee1">
+          <End Role="Employee1" Type="ECOMMModel.Store.Employee1" Multiplicity="1" />
+          <End Role="EmpRole" Type="ECOMMModel.Store.EmpRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee1">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="EmpRole">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpRole_EmpRole1">
+          <End Role="EmpRole" Type="ECOMMModel.Store.EmpRole" Multiplicity="1" />
+          <End Role="EmpRole1" Type="ECOMMModel.Store.EmpRole" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EmpRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="EmpRole1">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetDatabyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DeptId" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ECOMMModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ECOMMEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Depts" EntityType="ECOMMModel.Dept" />
+          <EntitySet Name="Employee1" EntityType="ECOMMModel.Employee1" />
+          <EntitySet Name="EmpRoles" EntityType="ECOMMModel.EmpRole" />
+          <EntitySet Name="Roles" EntityType="ECOMMModel.Role" />
+          <AssociationSet Name="FK_Employee1_Dept" Association="ECOMMModel.FK_Employee1_Dept">
+            <End Role="Dept" EntitySet="Depts" />
+            <End Role="Employee1" EntitySet="Employee1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpRole_Employee1" Association="ECOMMModel.FK_EmpRole_Employee1">
+            <End Role="Employee1" EntitySet="Employee1" />
+            <End Role="EmpRole" EntitySet="EmpRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpRole_EmpRole1" Association="ECOMMModel.FK_EmpRole_EmpRole1">
+            <End Role="EmpRole" EntitySet="EmpRoles" />
+            <End Role="EmpRole1" EntitySet="EmpRoles" />
+          </AssociationSet>
+          <FunctionImport Name="GetDatabyId" ReturnType="Collection(ECOMMModel.GetDatabyId_Result)">
+            <Parameter Name="DeptId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Dept">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="Int32" Nullable="false" />
+          <Property Name="Dname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Employee1" Relationship="ECOMMModel.FK_Employee1_Dept" FromRole="Dept" ToRole="Employee1" />
+        </EntityType>
+        <EntityType Name="Employee1">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="Empname" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Contact" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="DeptID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Dept" Relationship="ECOMMModel.FK_Employee1_Dept" FromRole="Employee1" ToRole="Dept" />
+          <NavigationProperty Name="EmpRoles" Relationship="ECOMMModel.FK_EmpRole_Employee1" FromRole="Employee1" ToRole="EmpRole" />
+        </EntityType>
+        <EntityType Name="EmpRole">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="EmpId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee1" Relationship="ECOMMModel.FK_EmpRole_Employee1" FromRole="EmpRole" ToRole="Employee1" />
+          <NavigationProperty Name="EmpRole1" Relationship="ECOMMModel.FK_EmpRole_EmpRole1" FromRole="EmpRole" ToRole="EmpRole1" />
+          <NavigationProperty Name="EmpRole2" Relationship="ECOMMModel.FK_EmpRole_EmpRole1" FromRole="EmpRole1" ToRole="EmpRole" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Employee1_Dept">
+          <End Role="Dept" Type="ECOMMModel.Dept" Multiplicity="1" />
+          <End Role="Employee1" Type="ECOMMModel.Employee1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dept">
+              <PropertyRef Name="DeptId" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="DeptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpRole_Employee1">
+          <End Role="Employee1" Type="ECOMMModel.Employee1" Multiplicity="1" />
+          <End Role="EmpRole" Type="ECOMMModel.EmpRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee1">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="EmpRole">
+              <PropertyRef Name="EmpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpRole_EmpRole1">
+          <End Role="EmpRole" Type="ECOMMModel.EmpRole" Multiplicity="1" />
+          <End Role="EmpRole1" Type="ECOMMModel.EmpRole" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EmpRole">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="EmpRole1">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetDatabyId_Result">
+          <Property Type="Int32" Name="EmpID" Nullable="false" />
+          <Property Type="String" Name="Empname" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Age" Nullable="false" />
+          <Property Type="Int32" Name="Contact" Nullable="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="DeptID" Nullable="false" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="DeptId1" Nullable="false" />
+          <Property Type="String" Name="Dname" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ECOMMModelStoreContainer" CdmEntityContainer="ECOMMEntities">
+          <EntitySetMapping Name="Depts">
+            <EntityTypeMapping TypeName="ECOMMModel.Dept">
+              <MappingFragment StoreEntitySet="Dept">
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="Dname" ColumnName="Dname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee1">
+            <EntityTypeMapping TypeName="ECOMMModel.Employee1">
+              <MappingFragment StoreEntitySet="Employee1">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="Empname" ColumnName="Empname" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpRoles">
+            <EntityTypeMapping TypeName="ECOMMModel.EmpRole">
+              <MappingFragment StoreEntitySet="EmpRole">
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ECOMMModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetDatabyId" FunctionName="ECOMMModel.Store.GetDatabyId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ECOMMModel.GetDatabyId_Result">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="Empname" ColumnName="Empname" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DeptId1" ColumnName="DeptId1" />
+                <ScalarProperty Name="Dname" ColumnName="Dname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
