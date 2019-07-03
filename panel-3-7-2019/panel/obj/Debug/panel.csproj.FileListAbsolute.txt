@@ -1,0 +1,4 @@
+c:\users\neova-user\documents\visual studio 2012\Projects\panel\panel\bin\panel.dll
+c:\users\neova-user\documents\visual studio 2012\Projects\panel\panel\bin\panel.pdb
+c:\users\neova-user\documents\visual studio 2012\Projects\panel\panel\obj\Debug\panel.dll
+c:\users\neova-user\documents\visual studio 2012\Projects\panel\panel\obj\Debug\panel.pdb
