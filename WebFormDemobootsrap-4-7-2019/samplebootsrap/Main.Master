@@ -1,0 +1,31 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="samplebootsrap.Main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head id="Head1" runat="server">
+    <title>Navbar Template for Bootstrap</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sample page to include Bootstrap and Web API to Asp.Net forms application.">
+    <meta name="author" content="Sree">
+
+    <asp:ContentPlaceHolder ID="StyleSection" runat="server" />
+
+</head>
+<body>
+ 
+    <div class="container">
+        <div class="container">
+        <asp:ContentPlaceHolder ID="ContentSection" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+     </div>
+    <script src="Scripts/jquery-3.4.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <asp:ContentPlaceHolder ID="ScriptSection" runat="server" />
+</body>
+</html>

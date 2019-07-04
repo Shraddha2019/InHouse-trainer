@@ -1,0 +1,5 @@
+c:\users\neova-user\documents\visual studio 2012\Projects\samplebootsrap\samplebootsrap\bin\samplebootsrap.dll
+c:\users\neova-user\documents\visual studio 2012\Projects\samplebootsrap\samplebootsrap\bin\samplebootsrap.pdb
+c:\users\neova-user\documents\visual studio 2012\Projects\samplebootsrap\samplebootsrap\obj\Debug\samplebootsrap.dll
+c:\users\neova-user\documents\visual studio 2012\Projects\samplebootsrap\samplebootsrap\obj\Debug\samplebootsrap.pdb
+c:\users\neova-user\documents\visual studio 2012\Projects\samplebootsrap\samplebootsrap\obj\Debug\samplebootsrap.csprojResolveAssemblyReference.cache
